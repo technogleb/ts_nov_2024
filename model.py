@@ -234,7 +234,7 @@ class TimeSeriesPredictor(BaseEstimator):
         if not self.model:
             raise ValueError('Model is not fitted yet')
 
-        unite_ts = ts.append(ts_batch)
+        unite_ts = pd.concat([ts, ts_batch])
         matrix = self.enrich(self.transform_into_matrix(unite_ts))
 
         data_batch = matrix[-len(ts_batch):]
