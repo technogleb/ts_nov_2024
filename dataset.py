@@ -5,11 +5,12 @@ import pandas as pd
 
 class Dataset:
     """Class representing dataset."""
-    def __init__(self, path, sep=',', date_format=''):
+    def __init__(self, path, sep=',', date_format='', header = 'infer'):
         self.path = path
         self._holder = {}
         self._sep = sep
         self.date_format = date_format
+        self.header = header
 
     def load(self):
         """Loads dataset into memory"""
@@ -35,6 +36,7 @@ class Dataset:
             os.path.join(self.path, item),
             index_col=0,
             sep=self._sep,
+            header=self.header
         ).squeeze()
         ts.index = pd.to_datetime(ts.index)
 
